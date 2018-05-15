@@ -32,7 +32,7 @@ map co-ordinates to car coordinates conversion.
 This was the most interesting part of the project (well, also the choise of the error parameters but this beats even that!).
 As there's a 100 ms delay between applying actuators commands and resulting car position, it should be considered in the computation.
 Essentially, this delay indicates that the position that we get for a given timestamp is a result of the actuators applied on previous timestamp.
-Hence, in computation I mapped the actuators to previous states. Specifically, for each N, actuators were associated with (N-1)th state.
+Hence, in computation I mapped the actuators to previous states. Specifically, for each N, actuators were associated with (N-1)th state. It resulted into several oscillations, especially during the turn, without incorporating this delay.
 
 ## Running the project
 You will require Udacity simulator to run this project.

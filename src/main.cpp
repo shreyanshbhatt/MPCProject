@@ -91,8 +91,6 @@ int main() {
           double py = j[1]["y"];
           double psi = j[1]["psi"];
           double v = j[1]["speed"];
-          std::cout << "size = " << ptsx.size() << std::endl;
-          std::cout << "size = " << ptsy.size() << std::endl;
           Eigen::VectorXd eptsx(6);
           Eigen::VectorXd eptsy(6);
 
@@ -103,7 +101,6 @@ int main() {
             eptsy(i) = (dx * sin(-psi) + dy * cos(-psi));
           }
 
-          std::cout << "inited" << std::endl;
           /*
           * TODO: Calculate steering angle and throttle using MPC.
           *
@@ -112,11 +109,9 @@ int main() {
           */
           auto coeffs = polyfit(eptsx, eptsy, 3);
           double cte = polyeval(coeffs, 0);
-          std::cout << "let's see...." << std::endl;
           double epsi = - atan(coeffs[1]);
           Eigen::VectorXd state(6);
           state << 0, 0, 0, v, cte, epsi;
-            std::cout << "going right in ..... " <<std::endl;
           auto vars = mpc.Solve(state, coeffs);
           double steer_value = -vars[6];
           double throttle_value = vars[7];
